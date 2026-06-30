@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>RUNNING</title></head><body>
+<iframe id="app" src="../index.html" hidden></iframe><pre id="result">RUNNING</pre>
+<script>
+document.getElementById("app").addEventListener("load", () => {
+  try {
+    const win = document.getElementById("app").contentWindow;
+    const doc = win.document;
+    const checks = [
+      ["eight projects", doc.querySelectorAll("#projects article").length === 8],
+      ["all images local", [...doc.images].every((image) => !image.getAttribute("src").startsWith("http"))],
+      ["filter API", typeof win.ProjectIndex.applyFilter === "function"]
+    ];
+    win.ProjectIndex.applyFilter("android");
+    checks.push(["android filter", [...doc.querySelectorAll("#projects article")].filter((item) => !item.hidden).length === 3]);
+    const ok = checks.every((item) => item[1]);
+    document.getElementById("result").textContent = (ok ? "PASS" : "FAIL") + "\n" + checks.map((item) => (item[1] ? "PASS " : "FAIL ") + item[0]).join("\n");
+    document.title = ok ? "PASS" : "FAIL";
+  } catch (error) { document.getElementById("result").textContent = "FAIL\n" + error.stack; document.title = "FAIL"; }
+}, { once: true });
+</script></body></html>
