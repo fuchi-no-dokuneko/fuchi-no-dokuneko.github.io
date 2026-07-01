@@ -7,9 +7,11 @@ document.getElementById("app").addEventListener("load", () => {
     const win = document.getElementById("app").contentWindow;
     const doc = win.document;
     const checks = [
-      ["eight projects", doc.querySelectorAll("#projects article").length === 8],
+      ["nine projects", doc.querySelectorAll("#projects article").length === 9],
       ["all images local", [...doc.images].every((image) => !image.getAttribute("src").startsWith("http"))],
-      ["filter API", typeof win.ProjectIndex.applyFilter === "function"]
+      ["filter API", typeof win.ProjectIndex.applyFilter === "function"],
+      ["Tensor Playground app link", Boolean(doc.querySelector('a[href="https://tensor-playground-research.pages.dev"]'))],
+      ["Tensor Playground repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/playground"]'))]
     ];
     win.ProjectIndex.applyFilter("android");
     checks.push(["android filter", [...doc.querySelectorAll("#projects article")].filter((item) => !item.hidden).length === 3]);
