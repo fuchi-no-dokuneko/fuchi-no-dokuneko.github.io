@@ -10,6 +10,7 @@ document.getElementById("app").addEventListener("load", () => {
       ["nine projects", doc.querySelectorAll("#projects article").length === 9],
       ["all images local", [...doc.images].every((image) => !image.getAttribute("src").startsWith("http"))],
       ["filter API", typeof win.ProjectIndex.applyFilter === "function"],
+      ["updates page linked", doc.querySelectorAll('a[href="updates.md"]').length >= 2],
       ["Tensor Playground app link", Boolean(doc.querySelector('a[href="https://tensor-playground-research.pages.dev"]'))],
       ["Tensor Playground repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/playground"]'))]
     ];
