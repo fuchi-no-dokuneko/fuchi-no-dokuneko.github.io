@@ -1,16 +1,26 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><title>RUNNING</title></head><body>
-<iframe id="app" src="../index.html" hidden></iframe><pre id="result">RUNNING</pre>
+<iframe id="app" src="../index.html" hidden></iframe><iframe id="updates" src="../updates.html" hidden></iframe><pre id="result">RUNNING</pre>
 <script>
-document.getElementById("app").addEventListener("load", () => {
+function loaded(frame) {
+  const expectedUrl = new URL(frame.getAttribute("src"), window.location.href).href;
+  if (frame.contentDocument && frame.contentDocument.readyState === "complete" && frame.contentWindow.location.href === expectedUrl) return Promise.resolve();
+  return new Promise((resolve) => frame.addEventListener("load", resolve, { once: true }));
+}
+(async () => {
+  await Promise.all([loaded(document.getElementById("app")), loaded(document.getElementById("updates"))]);
   try {
     const win = document.getElementById("app").contentWindow;
     const doc = win.document;
+    const updatesDoc = document.getElementById("updates").contentWindow.document;
     const checks = [
       ["nine projects", doc.querySelectorAll("#projects article").length === 9],
       ["all images local", [...doc.images].every((image) => !image.getAttribute("src").startsWith("http"))],
       ["filter API", typeof win.ProjectIndex.applyFilter === "function"],
-      ["updates page linked", doc.querySelectorAll('a[href="updates.md"]').length >= 2],
+      ["updates page button linked", doc.querySelectorAll('a.button-link[href="updates.html"]').length >= 2],
+      ["raw log still reachable", Boolean(doc.querySelector('a[href="updates.md"]'))],
+      ["updates page organized", updatesDoc.querySelectorAll(".log-entry").length >= 9],
+      ["updates page has repos", updatesDoc.body.textContent.includes("UsefulTool") && updatesDoc.body.textContent.includes("WafuStudyShield")],
       ["Tensor Playground app link", Boolean(doc.querySelector('a[href="https://tensor-playground-research.pages.dev"]'))],
       ["Tensor Playground repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/playground"]'))]
     ];
@@ -20,5 +30,5 @@ document.getElementById("app").addEventListener("load", () => {
     document.getElementById("result").textContent = (ok ? "PASS" : "FAIL") + "\n" + checks.map((item) => (item[1] ? "PASS " : "FAIL ") + item[0]).join("\n");
     document.title = ok ? "PASS" : "FAIL";
   } catch (error) { document.getElementById("result").textContent = "FAIL\n" + error.stack; document.title = "FAIL"; }
-}, { once: true });
+})().catch((error) => { document.getElementById("result").textContent = "FAIL\n" + error.stack; document.title = "FAIL"; });
 </script></body></html>

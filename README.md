@@ -2,7 +2,7 @@
 
 Public project directory for the `fuchi-no-dokuneko` GitHub account. It links to source repositories, Android releases, and deployed browser projects.
 
-See [updates.md](updates.md) for short, unofficial user-facing feature notes by repository.
+See [updates.html](updates.html) for the organized user-facing update page and [updates.md](updates.md) for the short raw markdown log.
 
 GitHub Actions validates the static site and publishes it to GitHub Pages. A separate workflow can mirror the site to Cloudflare Pages when the repository Cloudflare secrets are configured.
 
