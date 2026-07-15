@@ -4,6 +4,7 @@ Short, feature-based notes for normal users. These are not formal release notes.
 
 ## 2026-07-15
 
+- **UsefulTool** - File Diff and Word Count now keep typed text in the browser, so reloading the page does not lose the current draft.
 - **UsefulTool** - File Diff now highlights changed words inside edited lines by default, with stronger red/green colors for bigger vocabulary changes. A checkbox can turn word highlighting off.
 - **WafuStudyShield** - GitHub releases now include a signed sideload APK, so Android package installers can install and update the app more reliably.
 - **WafuStudyShield** - Added a setup prompt for Accessibility, Usage Access, and notifications, plus five-minute local reminders while required permissions are missing.
