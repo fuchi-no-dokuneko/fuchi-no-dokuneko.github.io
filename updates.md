@@ -2,6 +2,10 @@
 
 Short, feature-based notes for normal users. These are not formal release notes.
 
+## 2026-07-19
+
+- **WafuStudyShield** - Added an optional checkbox to randomize the Pause 5 min and Return home button positions for each new reminder, plus a v0.1.3 APK release.
+
 ## 2026-07-15
 
 - **UsefulTool** - File Diff and Word Count now keep typed text in the browser, so reloading the page does not lose the current draft.
