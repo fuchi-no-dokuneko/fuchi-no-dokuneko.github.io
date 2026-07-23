@@ -2,6 +2,12 @@
 
 Short, feature-based notes for normal users. These are not formal release notes.
 
+## 2026-07-23
+
+- **UsefulTool** - Added a local Dark and Light mode toggle across the UsefulTool pages, and the browser remembers the choice.
+- **UsefulTool** - Turned Word Count into a lightweight Text Editor with autosaved multi-drafts, optional line numbers, regex find and replace, Markdown preview, formatting, and draft key download/import.
+- **UsefulTool** - Added a small Text Upload and Download page, plus buttons to send editor text directly into File Diff. Offline HTML downloads were refreshed for every tool.
+
 ## 2026-07-19
 
 - **WafuStudyShield** - Added an optional checkbox to randomize the Pause 5 min and Return home button positions for each new reminder, plus a v0.1.3 APK release.
