@@ -1,0 +1,14 @@
+{
+  "name": "local-acceptance-pipelines",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local executable Gherkin pipelines for UAT and narrated demos",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "12.9.0",
+    "fast-xml-parser": "5.11.0",
+    "selenium-webdriver": "4.47.0"
+  }
+}

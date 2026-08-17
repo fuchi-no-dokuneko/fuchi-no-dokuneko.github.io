@@ -1,0 +1,6 @@
+{
+  "repository": "fuchi-no-dokuneko.github.io",
+  "platform": "web",
+  "baseUrl": "https://fuchi-no-dokuneko.github.io/",
+  "timeoutSeconds": 60
+}
