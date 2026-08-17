@@ -7,7 +7,6 @@ import {
   appendFile,
   mkdir,
   mkdtemp,
-  readFile,
   rm,
   stat,
   writeFile,
@@ -18,7 +17,7 @@ import path from "node:path";
 import process from "node:process";
 
 const root = process.cwd();
-const reportDirectory = path.resolve(process.argv[2] || "build/reports/browser-uat");
+const reportDirectory = path.join(root, "build", "reports", "browser-uat");
 const testPath = process.argv[3] || "/tests/browser-smoke.html";
 const timeoutMs = Number(process.env.UAT_TIMEOUT_MS || 60_000);
 
@@ -42,6 +41,17 @@ const mimeTypes = new Map([
 
 function sleep(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+async function stopBrowser(browser) {
+  if (browser.exitCode !== null) return;
+  const exited = new Promise((resolve) => browser.once("exit", resolve));
+  browser.kill("SIGTERM");
+  await Promise.race([exited, sleep(5_000)]);
+  if (browser.exitCode === null) {
+    browser.kill("SIGKILL");
+    await exited;
+  }
 }
 
 function xml(value) {
@@ -459,9 +469,9 @@ async function main() {
     }
   } finally {
     client?.close();
-    browser.kill("SIGTERM");
+    await stopBrowser(browser);
     await new Promise((resolve) => server.close(resolve));
-    await rm(profileDirectory, { recursive: true, force: true });
+    await rm(profileDirectory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   }
 }
 

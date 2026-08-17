@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   validate:
     name: Unit, UAT, and coverage
@@ -16,6 +18,11 @@ jobs:
         run: node --check app.js
       - name: Run browser unit and UAT coverage
         run: node scripts/run-browser-uat.mjs
+      - name: Run SonarQube Cloud analysis
+        if: vars.SONARQUBE_CLOUD_ENABLED == 'true'
+        uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Upload test and coverage reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -37,7 +44,7 @@ jobs:
         run: |
           if [ -n "$TOKEN" ] && [ -n "$ACCOUNT" ]; then echo configured=true >>"$GITHUB_OUTPUT"; echo "project=${PROJECT:-fuchi-no-dokuneko-projects}" >>"$GITHUB_OUTPUT"; else echo configured=false >>"$GITHUB_OUTPUT"; fi
       - if: steps.config.outputs.configured == 'true'
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
