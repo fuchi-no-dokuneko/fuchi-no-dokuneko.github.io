@@ -53,6 +53,15 @@ function xml(value) {
     .replaceAll("'", "&apos;");
 }
 
+function workflowError(title, message) {
+  if (!process.env.GITHUB_ACTIONS) return;
+  const escape = (value) => String(value)
+    .replaceAll("%", "%25")
+    .replaceAll("\r", "%0D")
+    .replaceAll("\n", "%0A");
+  process.stderr.write(`::error title=${escape(title)}::${escape(message)}\n`);
+}
+
 async function findBrowser() {
   const candidates = [
     process.env.BROWSER_BIN,
@@ -438,9 +447,14 @@ async function main() {
 
     process.stdout.write(`${resultText}\n`);
     process.stdout.write(`Line coverage ${coverage.coveredLines}/${coverage.totalLines} (${coverage.linePercent.toFixed(1)}%)\n`);
-    if (title !== "PASS" || checks.some((check) => !check.passed)) process.exitCode = 1;
+    if (title !== "PASS" || checks.some((check) => !check.passed)) {
+      workflowError("Browser UAT failed", resultText);
+      process.exitCode = 1;
+    }
     if (!coverage.totalLines) {
-      process.stderr.write("No application coverage was collected\n");
+      const message = "No application coverage was collected";
+      process.stderr.write(`${message}\n`);
+      workflowError("Browser coverage failed", message);
       process.exitCode = 1;
     }
   } finally {
@@ -452,6 +466,8 @@ async function main() {
 }
 
 main().catch((error) => {
-  process.stderr.write(`${error.stack || error}\n`);
+  const message = error.stack || error;
+  process.stderr.write(`${message}\n`);
+  workflowError("Browser UAT runner failed", message);
   process.exitCode = 1;
 });
