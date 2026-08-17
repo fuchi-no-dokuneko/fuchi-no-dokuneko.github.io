@@ -4,10 +4,31 @@ on:
     branches: [main]
   workflow_dispatch:
 jobs:
-  deploy:
+  validate:
+    name: Unit, UAT, and coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Check JavaScript syntax
+        run: node --check app.js
+      - name: Run browser unit and UAT coverage
+        run: node scripts/run-browser-uat.mjs
+      - name: Upload test and coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-test-reports
+          path: build/reports/browser-uat/
+          if-no-files-found: error
+  deploy:
+    needs: validate
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
       - id: config
         env:
           TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
