@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
           node-version: "24"
@@ -18,8 +20,21 @@ jobs:
         run: node --check app.js
       - name: Run browser unit and UAT coverage
         run: node scripts/run-browser-uat.mjs
+      - name: Verify SonarQube input reports
+        run: |
+          test -s build/reports/browser-uat/lcov.info
+          test -s build/reports/browser-uat/sonar-test-execution.xml
+      - name: Require SonarQube Cloud token
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -z "$SONAR_TOKEN" ]; then
+            echo "::error::Missing SONAR_TOKEN repository secret; coverage cannot be published."
+            exit 1
+          fi
       - name: Run SonarQube Cloud analysis
-        if: vars.SONARQUBE_CLOUD_ENABLED == 'true'
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
         uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
