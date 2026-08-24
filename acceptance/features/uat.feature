@@ -10,12 +10,16 @@ Feature: Daily acceptance of the fuchi-no-dokuneko project index
 
   Scenario: Filter every project category and restore the full directory
     Then CSS "#resultCount" contains text "Showing all 9 projects"
+    And CSS "[data-filter='all']" has CSS class "active"
     When I click CSS "[data-filter='web']"
     Then CSS "#resultCount" contains text "Showing 5 web projects"
     And exactly 5 elements match CSS "#projects article:not([hidden])"
+    And CSS "[data-filter='web']" has CSS class "active"
+    And CSS "[data-filter='all']" does not have CSS class "active"
     When I click CSS "[data-filter='android']"
     Then CSS "#resultCount" contains text "Showing 3 android projects"
     And exactly 3 elements match CSS "#projects article:not([hidden])"
+    And JavaScript expression "Array.from(document.querySelectorAll('#projects article:not([hidden]) h3')).every((heading) => ['RecorderLong','TodoDiary','WafuStudyShield'].includes(heading.textContent))" returns true
     When I click CSS "[data-filter='learning']"
     Then CSS "#resultCount" contains text "Showing 3 learning projects"
     And exactly 3 elements match CSS "#projects article:not([hidden])"
@@ -25,7 +29,9 @@ Feature: Daily acceptance of the fuchi-no-dokuneko project index
 
   Scenario: Present local project imagery and source or release destinations
     Then JavaScript expression "Array.from(document.images).every((image) => !image.getAttribute('src').startsWith('http') && image.naturalWidth > 0)" returns true
+    And JavaScript expression "Array.from(document.images).every((image) => image.alt.trim().length > 0)" returns true
     And JavaScript expression "Array.from(document.querySelectorAll('#projects article')).every((card) => card.querySelectorAll('.actions a').length === 2)" returns true
+    And JavaScript expression "Array.from(document.querySelectorAll('#projects article')).every((card) => card.dataset.category && card.querySelector('h3') && card.querySelector('.media'))" returns true
     And JavaScript expression "Array.from(document.querySelectorAll('#projects .actions a:last-child')).every((link) => link.href.startsWith('https://github.com/fuchi-no-dokuneko/'))" returns true
     And JavaScript expression "Boolean(document.querySelector('a[href=\"https://tensor-playground-research.pages.dev\"]'))" returns true
     And JavaScript expression "Boolean(document.querySelector('a[href=\"https://github.com/fuchi-no-dokuneko/playground\"]'))" returns true
@@ -42,3 +48,14 @@ Feature: Daily acceptance of the fuchi-no-dokuneko project index
     And CSS ".log-list" contains text "TODODIARY"
     When I click CSS "a[href='updates.md']"
     Then the web path ends with "updates.md"
+
+  Scenario: Return from updates to the complete project directory
+    When I click CSS "header a[href='updates.html']"
+    Then the web path ends with "updates.html"
+    And CSS "nav" contains text "Projects"
+    And CSS "nav" contains text "Raw markdown"
+    And CSS "nav" contains text "GitHub profile"
+    When I click CSS "a.button-link[href='/']"
+    Then the web path ends with "/"
+    And CSS "#resultCount" contains text "Showing all 9 projects"
+    And exactly 9 elements match CSS "#projects article:not([hidden])"

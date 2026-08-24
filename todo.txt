@@ -1,0 +1,3 @@
+繁中：未設定外部 TTS 與錄影封裝，尚未產生 MP4。
+
+English: External TTS and recorder wrappers are not configured; no MP4 has been generated.

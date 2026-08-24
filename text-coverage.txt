@@ -1,0 +1,3 @@
+project-index: Real Chromium exercises category filters, visible counts, local images, project destinations, and directory restoration; no application mocks.
+updates-log: Real Chromium exercises organized update navigation, repository labels, raw Markdown access, and return navigation; external GitHub destinations are inspected, not opened.
+demo-pipelines: English and Traditional Cantonese Gherkin use real pages with timed narration and configurable recorder/TTS wrappers; wrappers are optional in dry runs.

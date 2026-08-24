@@ -87,6 +87,16 @@ Then("CSS {string} has attribute {string} equal to {string}", async function (se
   assert.equal(await (await runtime.cssElement(this, selector, false)).getAttribute(attribute), expected);
 });
 
+Then("CSS {string} has CSS class {string}", async function (selector, className) {
+  const classes = String(await (await runtime.cssElement(this, selector, false)).getAttribute("class") || "").split(/\s+/);
+  assert.ok(classes.includes(className), `Expected ${selector} to have class ${className}`);
+});
+
+Then("CSS {string} does not have CSS class {string}", async function (selector, className) {
+  const classes = String(await (await runtime.cssElement(this, selector, false)).getAttribute("class") || "").split(/\s+/);
+  assert.ok(!classes.includes(className), `Expected ${selector} not to have class ${className}`);
+});
+
 Then("CSS {string} eventually has a non-empty value", async function (selector) {
   await runtime.waitCssValue(this, selector, (value) => Boolean(value), "a non-empty value");
 });
