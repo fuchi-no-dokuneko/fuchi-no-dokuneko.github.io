@@ -14,7 +14,7 @@ function loaded(frame) {
     const doc = win.document;
     const updatesDoc = document.getElementById("updates").contentWindow.document;
     const checks = [
-      ["nine projects", doc.querySelectorAll("#projects article").length === 9],
+      ["ten projects", doc.querySelectorAll("#projects article").length === 10],
       ["all images local", [...doc.images].every((image) => !image.getAttribute("src").startsWith("http"))],
       ["filter API", typeof win.ProjectIndex.applyFilter === "function"],
       ["updates page button linked", doc.querySelectorAll('a.button-link[href="updates.html"]').length >= 2],
@@ -22,7 +22,9 @@ function loaded(frame) {
       ["updates page organized", updatesDoc.querySelectorAll(".log-entry").length >= 9],
       ["updates page has repos", updatesDoc.body.textContent.includes("UsefulTool") && updatesDoc.body.textContent.includes("WafuStudyShield")],
       ["Tensor Playground app link", Boolean(doc.querySelector('a[href="https://tensor-playground-research.pages.dev"]'))],
-      ["Tensor Playground repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/playground"]'))]
+      ["Tensor Playground repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/playground"]'))],
+      ["Quantum Wallpaper app link", Boolean(doc.querySelector('a[href="https://quantum-wallpaper.pages.dev"]'))],
+      ["Quantum Wallpaper repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/quantum-wallpaper"]'))]
     ];
     win.ProjectIndex.applyFilter("android");
     checks.push(["android filter", [...doc.querySelectorAll("#projects article")].filter((item) => !item.hidden).length === 3]);
