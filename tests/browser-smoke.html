@@ -14,20 +14,23 @@ function loaded(frame) {
     const doc = win.document;
     const updatesDoc = document.getElementById("updates").contentWindow.document;
     const checks = [
-      ["ten projects", doc.querySelectorAll("#projects article").length === 10],
+      ["eleven projects", doc.querySelectorAll("#projects article").length === 11],
       ["all images local", [...doc.images].every((image) => !image.getAttribute("src").startsWith("http"))],
       ["filter API", typeof win.ProjectIndex.applyFilter === "function"],
       ["updates page button linked", doc.querySelectorAll('a.button-link[href="updates.html"]').length >= 2],
       ["raw log still reachable", Boolean(doc.querySelector('a[href="updates.md"]'))],
-      ["updates page organized", updatesDoc.querySelectorAll(".log-entry").length >= 9],
-      ["updates page has repos", updatesDoc.body.textContent.includes("UsefulTool") && updatesDoc.body.textContent.includes("WafuStudyShield")],
+      ["updates page organized", updatesDoc.querySelectorAll(".log-entry").length >= 10],
+      ["updates page has repos", updatesDoc.body.textContent.includes("UsefulTool") && updatesDoc.body.textContent.includes("WafuStudyShield") && updatesDoc.body.textContent.includes("Doc Reader")],
       ["Tensor Playground app link", Boolean(doc.querySelector('a[href="https://tensor-playground-research.pages.dev"]'))],
       ["Tensor Playground repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/playground"]'))],
       ["Quantum Wallpaper app link", Boolean(doc.querySelector('a[href="https://quantum-wallpaper.pages.dev"]'))],
-      ["Quantum Wallpaper repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/quantum-wallpaper"]'))]
+      ["Quantum Wallpaper repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/quantum-wallpaper"]'))],
+      ["Doc Reader project page link", Boolean(doc.querySelector('a[href="https://fuchi-no-dokuneko.github.io/doc-reader-app/"]'))],
+      ["Doc Reader release link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/doc-reader-app/releases/latest"]'))],
+      ["Doc Reader repository link", Boolean(doc.querySelector('a[href="https://github.com/fuchi-no-dokuneko/doc-reader-app"]'))]
     ];
     win.ProjectIndex.applyFilter("android");
-    checks.push(["android filter", [...doc.querySelectorAll("#projects article")].filter((item) => !item.hidden).length === 3]);
+    checks.push(["android filter", [...doc.querySelectorAll("#projects article")].filter((item) => !item.hidden).length === 4]);
     const ok = checks.every((item) => item[1]);
     document.getElementById("result").textContent = (ok ? "PASS" : "FAIL") + "\n" + checks.map((item) => (item[1] ? "PASS " : "FAIL ") + item[0]).join("\n");
     document.title = ok ? "PASS" : "FAIL";

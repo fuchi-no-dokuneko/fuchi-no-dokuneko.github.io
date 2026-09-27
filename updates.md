@@ -2,6 +2,10 @@
 
 Short, feature-based notes for normal users. These are not formal release notes.
 
+## 2026-09-27
+
+- **Doc Reader** - Published the offline document reader with a public project page, repository, and signed APK release, and added it to the project directory.
+
 ## 2026-08-31
 
 - **Quantum Wallpaper** - Published the interactive WebGL2 quantum-wave wallpaper at <https://quantum-wallpaper.pages.dev> and added it to the public project directory.

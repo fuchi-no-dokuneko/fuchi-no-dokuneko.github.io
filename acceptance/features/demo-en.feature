@@ -9,11 +9,11 @@ Feature: English key-feature demonstration of the project index
       This project index gathers the public browser tools, Android applications, and learning projects in one scannable directory, with direct app and source links on each entry.
       """
     And I click CSS "[data-filter='android']"
-    Then CSS "#resultCount" contains text "Showing 3 android projects"
-    And exactly 3 elements match CSS "#projects article:not([hidden])"
+    Then CSS "#resultCount" contains text "Showing 4 android projects"
+    And exactly 4 elements match CSS "#projects article:not([hidden])"
     When I narrate in "en-US" for at least 6 seconds:
       """
-      Category filters narrow the directory immediately. Here the Android view contains RecorderLong, TodoDiary, and WafuStudyShield.
+      Category filters narrow the directory immediately. Here the Android view contains Doc Reader, RecorderLong, TodoDiary, and WafuStudyShield.
       """
     And I click CSS "header a[href='updates.html']"
     Then the web path ends with "updates.html"

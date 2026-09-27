@@ -9,11 +9,11 @@ Feature: 專案索引粵語主要功能示範
       呢個專案索引將公開瀏覽器工具、Android 應用程式同學習專案集中喺一個容易瀏覽嘅目錄，每個項目都有直接開啟同原始碼連結。
       """
     And I click CSS "[data-filter='android']"
-    Then CSS "#resultCount" contains text "Showing 3 android projects"
-    And exactly 3 elements match CSS "#projects article:not([hidden])"
+    Then CSS "#resultCount" contains text "Showing 4 android projects"
+    And exactly 4 elements match CSS "#projects article:not([hidden])"
     When I narrate in "yue-HK" for at least 6 seconds:
       """
-      分類按鈕會即時收窄項目。Android 畫面而家會顯示 RecorderLong、TodoDiary 同 WafuStudyShield。
+      分類按鈕會即時收窄項目。Android 畫面而家會顯示 Doc Reader、RecorderLong、TodoDiary 同 WafuStudyShield。
       """
     And I click CSS "header a[href='updates.html']"
     Then the web path ends with "updates.html"
