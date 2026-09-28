@@ -2,6 +2,12 @@
 
 Short, feature-based notes for normal users. These are not formal release notes.
 
+## 2026-09-28
+
+- **Doc Reader** - Restored EPUB opening and navigation on Android, with compatibility checks for the reader flow.
+- **Doc Reader** - Added source and text editing with save, save-as, conflict handling, and edited-tab state.
+- **Doc Reader** - Improved syntax colors and token handling for clearer source-code reading and editing.
+
 ## 2026-09-27
 
 - **Doc Reader** - Published the offline document reader with a public project page, repository, and signed APK release, and added it to the project directory.
