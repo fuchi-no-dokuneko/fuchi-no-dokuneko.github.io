@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title description">
+  <title id="title">Summon Theater</title>
+  <desc id="description">A glowing summoning ring surrounded by stars and fantasy cards.</desc>
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="44%" r="72%">
+      <stop offset="0" stop-color="#24336e"/>
+      <stop offset=".52" stop-color="#0c1233"/>
+      <stop offset="1" stop-color="#03040b"/>
+    </radialGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#fff7c8" stop-opacity=".98"/>
+      <stop offset=".22" stop-color="#ffd86f" stop-opacity=".78"/>
+      <stop offset=".62" stop-color="#8a65ff" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#8a65ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff1ad"/>
+      <stop offset=".5" stop-color="#d59b36"/>
+      <stop offset="1" stop-color="#fff0a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#sky)"/>
+  <circle cx="320" cy="194" r="182" fill="url(#glow)"/>
+  <g fill="none" stroke="url(#gold)" opacity=".9">
+    <circle cx="320" cy="194" r="126" stroke-width="3"/>
+    <circle cx="320" cy="194" r="105" stroke-width="1.5" stroke-dasharray="5 9"/>
+    <path d="M320 68 347 167 446 194 347 221 320 320 293 221 194 194 293 167Z" stroke-width="2"/>
+    <path d="m231 105 178 178M409 105 231 283" stroke-width="1" opacity=".55"/>
+  </g>
+  <g fill="#fff7c8">
+    <path d="m320 124 10 59 59 11-59 10-10 60-10-60-59-10 59-11Z"/>
+    <circle cx="170" cy="92" r="4"/><circle cx="470" cy="117" r="3"/><circle cx="515" cy="238" r="5"/>
+    <circle cx="126" cy="250" r="3"/><circle cx="219" cy="313" r="4"/><circle cx="421" cy="300" r="3"/>
+  </g>
+  <g transform="translate(76 112) rotate(-11 65 90)">
+    <rect width="130" height="180" rx="12" fill="#111936" stroke="#e8c77a" stroke-width="4"/>
+    <path d="M65 35 78 75 118 90 78 104 65 145 52 104 12 90 52 75Z" fill="#7558d8" stroke="#f5d985" stroke-width="2"/>
+  </g>
+  <g transform="translate(434 112) rotate(11 65 90)">
+    <rect width="130" height="180" rx="12" fill="#111936" stroke="#e8c77a" stroke-width="4"/>
+    <circle cx="65" cy="88" r="40" fill="#2d6aa2" stroke="#f5d985" stroke-width="2"/>
+    <path d="m65 43 11 33 34 12-34 11-11 34-11-34-34-11 34-12Z" fill="#cdefff"/>
+  </g>
+  <rect x="0" y="336" width="640" height="84" fill="#03040b" fill-opacity=".82"/>
+  <text x="320" y="376" fill="#ffe39a" font-family="Georgia,serif" font-size="30" font-weight="700" letter-spacing="8" text-anchor="middle">SUMMON THEATER</text>
+  <text x="320" y="401" fill="#b9bde1" font-family="Arial,sans-serif" font-size="13" letter-spacing="3" text-anchor="middle">CUSTOM CARD REVEALS</text>
+</svg>

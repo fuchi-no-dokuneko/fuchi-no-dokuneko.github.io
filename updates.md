@@ -2,6 +2,10 @@
 
 Short, feature-based notes for normal users. These are not formal release notes.
 
+## 2026-09-29
+
+- **Summon Theater** - Published the customizable card-reveal theater at <https://summon-7hr.pages.dev> and added it to the project directory. Its source repository is private.
+
 ## 2026-09-28
 
 - **Doc Reader** - Restored EPUB opening and navigation on Android, with compatibility checks for the reader flow.
