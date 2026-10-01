@@ -2,6 +2,10 @@
 
 Short, feature-based notes for normal users. These are not formal release notes.
 
+## 2026-10-01
+
+- **Doc Reader** - Published the signed [v1.0.2 release](https://github.com/fuchi-no-dokuneko/doc-reader-app/releases/tag/v1.0.2) with more reliable Android EPUB importing, isolated document sources, preserved reading positions, and migration coverage.
+
 ## 2026-09-29
 
 - **Summon Theater** - Published the customizable card-reveal theater at <https://summon-7hr.pages.dev> and added it to the project directory. Its source repository is private.
